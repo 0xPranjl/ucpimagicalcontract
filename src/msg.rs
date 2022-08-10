@@ -24,6 +24,9 @@ pub enum HandleMsg {
     magicalid:String,
     ucpiJWTtoken:String,
     timestamp: Option<u64>
+  },
+  GetKey{
+    magicalid:String
   }
 }
 
@@ -31,7 +34,7 @@ pub enum HandleMsg {
 #[serde(rename_all = "snake_case")]
 pub enum QueryMsg {
     // GetCount returns the current count as a json-encoded number
-    GetCount {},
+    // GetCount {},
 }
 /// Responses from handle functions
 #[derive(Serialize, Deserialize, Debug, JsonSchema)]
@@ -49,8 +52,23 @@ pub enum HandleAnswer {
         status: bool,
         address:String,
         timestamp: Option<u64>,
-        ucpiJWTtoken:String
+        ucpiJWTtoken:String,
+        error:bool
+    },
+    VoteForAuth{
+        status:bool,
+        error:bool,
+        ucpiJWTtoken:String,
+        msg:String
+    },
+    GetKey{
+        status:bool,
+        error:bool,
+        msg:String,
+        key:String
     }
+
+
 }
 
 // // We define a custom struct for each query response
