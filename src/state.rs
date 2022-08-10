@@ -14,6 +14,10 @@ pub struct State {
     pub count: i32,
     pub owner: CanonicalAddr,
 }
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
+pub struct Owner{
+    pub magicalid: String
+}
 
 pub fn save<T: Serialize, S: Storage>(storage: &mut S, key: &[u8], value: &T) -> StdResult<()> {
     storage.set(key, &Bincode2::serialize(value)?);

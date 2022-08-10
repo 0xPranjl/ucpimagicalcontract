@@ -29,13 +29,6 @@ pub enum HandleMsg {
     magicalid:String
   }
 }
-
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
-#[serde(rename_all = "snake_case")]
-pub enum QueryMsg {
-    // GetCount returns the current count as a json-encoded number
-    // GetCount {},
-}
 /// Responses from handle functions
 #[derive(Serialize, Deserialize, Debug, JsonSchema)]
 #[serde(rename_all = "snake_case")]
@@ -67,10 +60,22 @@ pub enum HandleAnswer {
         msg:String,
         key:String
     }
-
-
 }
-
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
+#[serde(rename_all = "snake_case")]
+pub enum QueryMsg {
+    /// Gets basic statistics about the use of the contract
+    Owner{ }
+}
+/// Responses from query functions
+#[derive(Serialize, Deserialize, Debug, JsonSchema)]
+#[serde(rename_all = "snake_case")]
+pub enum QueryAnswer {
+    /// Return basic statistics about contract
+    OwnerDetail {
+        reminder_count: u64,
+    }
+}
 // // We define a custom struct for each query response
 // #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 // pub struct CountResponse {
