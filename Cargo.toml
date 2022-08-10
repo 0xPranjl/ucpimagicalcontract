@@ -40,7 +40,6 @@ schemars = "0.7"
 cosmwasm-std = { version = "0.10", package = "secret-cosmwasm-std" }
 cosmwasm-storage = { version = "0.10", package = "secret-cosmwasm-storage" }
 
-
+secret-toolkit = { git = "https://github.com/enigmampc/secret-toolkit" }
 [dev-dependencies]
 cosmwasm-schema = "0.10.1"
-secret-toolkit = { git = "https://github.com/enigmampc/secret-toolkit" }
