@@ -19,8 +19,12 @@ pub enum HandleMsg {
     magicalid:String,
     ucpiJWTtoken:String,
     timestamp: Option<u64>,
+  },
+  VoteForAuth{
+    magicalid:String,
+    ucpiJWTtoken:String,
+    timestamp: Option<u64>
   }
-  
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
@@ -49,8 +53,8 @@ pub enum HandleAnswer {
     }
 }
 
-// We define a custom struct for each query response
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
-pub struct CountResponse {
-    pub count: i32,
-}
+// // We define a custom struct for each query response
+// #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
+// pub struct CountResponse {
+//     pub count: i32,
+// }
