@@ -3,8 +3,8 @@ use cosmwasm_std::{
     StdError, StdResult, Storage,
 };
 
-use crate::msg::{HandleMsg, InitMsg, QueryMsg};
-use crate::state::{CONFIG_KEY,Owner,State, save};
+use crate::msg::{HandleMsg, InitMsg, QueryMsg, QueryAnswer};
+use crate::state::{CONFIG_KEY,Owner,State, save, load};
 
 pub fn init<S: Storage, A: Api, Q: Querier>(
     deps: &mut Extern<S, A, Q>,
@@ -25,14 +25,25 @@ pub fn handle<S: Storage, A: Api, Q: Querier>(
     env: Env,
     msg: HandleMsg,
 ) -> StdResult<HandleResponse> {
-
+match msg{
+    HandleMsg::AddEncryptionKey { magicalid, keyentropy, timestamp, ucpiJWTtoken } => todo!(),
+    HandleMsg::GenerateTempOwner { magicalid, ucpiJWTtoken, timestamp } => todo!(),
+    HandleMsg::VoteForAuth { magicalid, ucpiJWTtoken, timestamp } => todo!(),
+    HandleMsg::GetKey { magicalid } => todo!(),
+    HandleMsg::Owner{}=>todo!(),
 }
-
+}
 
 pub fn query<S: Storage, A: Api, Q: Querier>(
     deps: &Extern<S, A, Q>,
     msg: QueryMsg,
 ) -> StdResult<Binary> {
-   
+   match msg{
+        QueryMsg::Owner {}=> {
+            let config: Owner = load(&deps.storage, CONFIG_KEY)?;
+            to_binary(&QueryAnswer::OwnerDetail{ owner: config.magicalid })
+          }
+       
+        
+    }
 }
-

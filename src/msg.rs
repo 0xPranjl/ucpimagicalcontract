@@ -27,7 +27,10 @@ pub enum HandleMsg {
   },
   GetKey{
     magicalid:String
-  }
+  },
+  Owner{
+  },
+
 }
 /// Responses from handle functions
 #[derive(Serialize, Deserialize, Debug, JsonSchema)]
@@ -38,20 +41,20 @@ pub enum HandleAnswer {
       status:bool,
       error:bool,
       msg:String,
-      ucpiJWTtoken:String     
+      ucpi_jwttoken:String     
     },
     /// Return a status message and the current reminder and its timestamp, if it exists
     GenerateTempOwner {
         status: bool,
         address:String,
         timestamp: Option<u64>,
-        ucpiJWTtoken:String,
+        ucpi_jwttoken:String,
         error:bool
     },
     VoteForAuth{
         status:bool,
         error:bool,
-        ucpiJWTtoken:String,
+        ucpi_jwttoken:String,
         msg:String
     },
     GetKey{
@@ -73,9 +76,12 @@ pub enum QueryMsg {
 pub enum QueryAnswer {
     /// Return basic statistics about contract
     OwnerDetail {
-        reminder_count: u64,
+        owner: String,
+    },
+    Ownerprint{
+      magicalid:String
     }
-}
+  }
 // // We define a custom struct for each query response
 // #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 // pub struct CountResponse {
