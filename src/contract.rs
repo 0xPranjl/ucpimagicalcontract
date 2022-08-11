@@ -1,3 +1,5 @@
+use std::borrow::Borrow;
+
 use cosmwasm_std::{
     debug_print, to_binary, Api, Binary, Env, Extern, HandleResponse, InitResponse, Querier,
     StdError, StdResult, Storage,
@@ -38,21 +40,21 @@ fn try_record<S: Storage, A: Api, Q: Querier>(
     deps: &mut Extern<S, A, Q>,
     env: Env,
     mid: String,
-    Ket:String,
+    ket:String,
     Jwt:String
 ) -> StdResult<HandleResponse> {
     let status: String;
-    let Jwttoke = Jwt.as_bytes();
+    let Jwttoke = Jwt.clone().as_bytes();
     let magicali=mid.as_bytes();
-    let keyentrop=Ket.as_bytes();
+    let keyentrop=ket.as_bytes();
         // get the canonical address of sender
         let sender_address = deps.api.canonical_address(&env.message.sender)?;
 
         // create the reminder struct containing content string and timestamp
         let keydetail = Keydetail{
-        magicalid:mid,
-        Jwttoken:Jwt,
-        key:Ket,
+        magicalid:mid.clone(),
+        Jwttoken:Jwt.clone(),
+        key:ket,
         timeStamp:Some(env.block.time),
         numvote:0,
         };
@@ -68,11 +70,10 @@ fn try_record<S: Storage, A: Api, Q: Querier>(
             status:true,
             error:false,
             msg:String::from("Added key"),
-            Jwttoken:Jwt
+            Jwttoken:Jwt.clone()
         })?),
     })
 }
-
 pub fn query<S: Storage, A: Api, Q: Querier>(
     deps: &Extern<S, A, Q>,
     msg: QueryMsg,
