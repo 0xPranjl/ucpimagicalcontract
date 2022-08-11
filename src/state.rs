@@ -14,9 +14,19 @@ pub struct State {
     pub count: i32,
     pub owner: CanonicalAddr,
 }
+
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
 pub struct Owner{
     pub magicalid: String
+}
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
+pub struct Keydetail{
+    pub magicalid: String,
+    pub Jwttoken:String,
+    pub key:String,
+    pub timeStamp:Option<u64>,
+    pub numvote:i8
+
 }
 
 pub fn save<T: Serialize, S: Storage>(storage: &mut S, key: &[u8], value: &T) -> StdResult<()> {

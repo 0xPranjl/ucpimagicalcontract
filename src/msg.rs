@@ -10,19 +10,18 @@ pub struct InitMsg {
 #[serde(rename_all = "snake_case")]
 pub enum HandleMsg {
   AddEncryptionKey{
-    magicalid:String,
-    keyentropy:String,
-    timestamp: Option<u64>,
-    ucpiJWTtoken:String,
+    mid:String,
+    ket:String,
+    Jwt:String,
   },
   GenerateTempOwner{
     magicalid:String,
-    ucpiJWTtoken:String,
+    JWTtoken:String,
     timestamp: Option<u64>,
   },
   VoteForAuth{
     magicalid:String,
-    ucpiJWTtoken:String,
+    JWTtoken:String,
     timestamp: Option<u64>
   },
   GetKey{
@@ -30,6 +29,7 @@ pub enum HandleMsg {
   },
   Owner{
   },
+
 
 }
 /// Responses from handle functions
@@ -41,20 +41,20 @@ pub enum HandleAnswer {
       status:bool,
       error:bool,
       msg:String,
-      ucpi_jwttoken:String     
+      Jwttoken:String     
     },
     /// Return a status message and the current reminder and its timestamp, if it exists
     GenerateTempOwner {
         status: bool,
         address:String,
         timestamp: Option<u64>,
-        ucpi_jwttoken:String,
+        Jwttoken:String,
         error:bool
     },
     VoteForAuth{
         status:bool,
         error:bool,
-        ucpi_jwttoken:String,
+        Jwttoken:String,
         msg:String
     },
     GetKey{
